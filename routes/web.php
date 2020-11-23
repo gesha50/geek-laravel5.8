@@ -17,14 +17,16 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/info', 'InfoController@index')->name('info');
 
+Route::group(["prefix" => "news"], function (){
+    Route::get('/', 'NewsController@index')->name('news');
+    Route::get('/{id}', 'NewsController@oneNews')->name('news_id');
+});
 
-Route::get('/news', 'NewsController@index')->name('news');
-Route::get('/news/{id}', 'NewsController@oneNews')->name('news.id');
 
-
-Route::get('/category', 'CategoryController@getCategory')->name('category');
-Route::get('/category/{id}', 'CategoryController@getOneCategory')->name('category.id');
-
+Route::group(["prefix" => "category"], function (){
+    Route::get('/', 'CategoryController@getCategory')->name('category');
+    Route::get('/{id}', 'CategoryController@getOneCategory')->name('category.id');
+});
 
 
 
