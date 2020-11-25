@@ -4,17 +4,11 @@
 
 @section('content')
     <h1>Новости</h1>
-
-    @foreach ($news as $item)
-
-        <div class="newsBlock">
-            <h3>{{ $item['title'] }}</h3>
-            <p>{{ $item['description'] }}</p>
-            <a href="{{ route('news_id', $item['id']) }}">Читать подробнее...</a>
-        </div>
-
-    @endforeach
-
+    <div class="d-flex flex-wrap justify-content-between">
+        @foreach ($news as $item)
+        @include('news.newsCart')
+        @endforeach
+    </div>
 @endsection
 
 

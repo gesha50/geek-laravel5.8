@@ -13,11 +13,20 @@
     <title>@yield('title')</title>
 </head>
 <body>
+<div id="app">
 <div class="container">
 @include('inc.header')
     <div class="main">
-        @yield('content')
+        <div class="row jumbotron">
+            <div class="col-md-2">
+                @include('inc.aside')
+            </div>
+            <div class="col-md-10 text-center">
+                @yield('content')
+            </div>
+        </div>
     </div>
+</div>
 </div>
 </body>
 </html>
