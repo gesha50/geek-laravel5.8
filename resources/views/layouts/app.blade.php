@@ -14,10 +14,10 @@
 </head>
 <body>
 <div id="app">
-<div class="container">
+<div class="container jumbotron content">
 @include('inc.header')
     <div class="main">
-        <div class="row jumbotron">
+        <div class="row">
             <div class="col-md-2">
                 @include('inc.aside')
             </div>
@@ -27,6 +27,7 @@
         </div>
     </div>
 </div>
+    @include('inc.footer')
 </div>
 </body>
 </html>

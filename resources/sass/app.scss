@@ -10,8 +10,14 @@
 body {
     background: #dbd6d6;
 }
+
+.content{
+    min-height: calc(100vh - 118px);
+}
 .main {
-    margin-top: 55px;
+}
+.jumbotron {
+    margin-bottom: 0;
 }
 
 .newsBlock {
@@ -21,4 +27,12 @@ body {
 
 .margin {
     margin-top: 60px;
+}
+
+
+
+// footer
+.footer {
+    padding: 20px;
+    background: rgb(52, 58, 64);
 }

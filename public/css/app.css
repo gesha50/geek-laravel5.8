@@ -10907,8 +10907,12 @@ body {
   background: #dbd6d6;
 }
 
-.main {
-  margin-top: 55px;
+.content {
+  min-height: calc(100vh - 118px);
+}
+
+.jumbotron {
+  margin-bottom: 0;
 }
 
 .newsBlock {
@@ -10918,5 +10922,10 @@ body {
 
 .margin {
   margin-top: 60px;
+}
+
+.footer {
+  padding: 20px;
+  background: #343a40;
 }
 
