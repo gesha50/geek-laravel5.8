@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+//@import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
@@ -32,5 +32,9 @@ body {
 // footer
 .footer {
     padding: 20px;
-    background: rgb(52, 58, 64);
+    background: #343a40;
+}
+
+.height {
+    height: 100px;
 }

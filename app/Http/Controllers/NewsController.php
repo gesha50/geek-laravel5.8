@@ -10,20 +10,17 @@ class NewsController extends Controller
 {
     //
     public function index () {
-        $category = CATEGORY::getCategory();
-        $news = News::getNews();
         return view('news',[
-            'news' => $news,
-            'newsCategory' => $category
+            'news' => News::getNews(),
+            'newsCategory' => CATEGORY::getCategory()
         ]);
     }
 
     public function oneNews ($id) {
-        $category = CATEGORY::getCategory();
         $oneNews = News::getNews();
         return view('oneNews',[
             'oneNews' => $oneNews[$id],
-            'newsCategory' => $category
+            'newsCategory' => CATEGORY::getCategory()
         ]);
     }
 }

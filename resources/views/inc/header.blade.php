@@ -7,18 +7,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('info') }}">Информация</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('news') }}">Новости</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('category') }}">Категории</a>
-            </li>
+            @if(isset($isAdmin))
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.index') }}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.news.allNews') }}">Новости</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.news.add') }}">Добавить</a>
+                </li>
+            @else
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ route('home') }}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('info') }}">Информация</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('news') }}">Новости</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('category') }}">Категории</a>
+                </li>
+            @endif
         </ul>
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
