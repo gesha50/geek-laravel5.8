@@ -8,16 +8,23 @@ use App\Models\News;
 
 class NewsController extends Controller
 {
+    public $obj;
+
+    public function __construct()
+    {
+        $this->obj = new News();
+    }
+
     //
     public function index () {
         return view('news',[
-            'news' => News::getNews(),
+            'news' => $this->obj->getNews(),
             'newsCategory' => CATEGORY::getCategory()
         ]);
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNews();
+        $oneNews = $this->obj->getNews();
         return view('oneNews',[
             'oneNews' => $oneNews[$id],
             'newsCategory' => CATEGORY::getCategory()

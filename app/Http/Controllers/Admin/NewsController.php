@@ -11,6 +11,13 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
+    public $obj;
+
+    public function __construct()
+    {
+//        $this->obj = new News();
+    }
+
     public function allNews () {
         return view('admin.allNews',[
             'news' => News::getNews(),
@@ -32,19 +39,18 @@ class NewsController extends Controller
 
         if ($request->method() == 'POST'){
             News::addNews($request->only('title', 'description', 'isPrivate'));
-            redirect(route('admin/news'));
+            return redirect(route('admin.news.allNews'));
+        } else {
+            return view('admin.add',[
+                'newsCategory' => CATEGORY::getCategory(),
+                'isAdmin' => true
+            ]);
         }
-
-        return view('admin.add',[
-            //'news' => News::getNews(),
-            'newsCategory' => CATEGORY::getCategory(),
-            'isAdmin' => true
-        ]);
     }
 
     public function delete ($id) {
         News::delete($id);
-        redirect(route('admin.news'));
+        return redirect(route('admin.news.allNews'));
     }
 
 }
