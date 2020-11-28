@@ -17,16 +17,28 @@ class News
     public static function addNews ($array){
         $json = file_get_contents("./news.json");
         self::$news = json_decode($json, true);
+
+        if (isset($array['isPrivate'])){
+            $isPrivate = true;
+        } else {
+            $isPrivate = false;
+        }
+        $id = self::getId() + 1;
         $arr = [
-            'id' => count(self::$news['news']),
+            'id' => $id,
             'category_id' => '1',
+            'isPrivate' => $isPrivate,
             'title' => $array['title'],
             'description' => $array['description']
         ];
 
-        self::$news['news'][count(self::$news['news'])] = $arr;
+        self::$news['news'][$id] = $arr;
         file_put_contents('./news.json', json_encode(self::$news));
         return self::$news;
+    }
+
+    public static function getId () {
+        return array_key_last(self::$news['news']);
     }
 
     public static function delete ($id){
@@ -37,5 +49,4 @@ class News
         file_put_contents('./news.json', json_encode(self::$news));
         return self::$news;
     }
-
 }

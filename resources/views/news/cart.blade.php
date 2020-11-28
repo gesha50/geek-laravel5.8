@@ -1,5 +1,5 @@
 
-    <div class="card m-2">
+    <div class="card m-2 @if($item['isPrivate']) bg-warning @endif">
         <h3 class="card-header">{{ $item['title'] }}</h3>
         <div class="card-body">
             <p class="card-text">{{ $item['description'] }}</p>
