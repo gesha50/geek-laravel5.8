@@ -21,13 +21,12 @@ class CategoryController extends BaseWithCalcController
     }
 
     public function getOneCategory ($id) {
-        $obj = new News();
         $category = CATEGORY::getCategory();
-        $allNews = $obj->getNews();
+        $allNews = News::getNews()['news'];
         $oneCategory = [];
-        for ($i=0; $i<count($allNews);$i++){
-            if($allNews[$i]['category_id'] == $id){
-                $oneCategory[] = $allNews[$i];
+        foreach ($allNews as $news){
+            if($news['category_id'] == $id){
+                $oneCategory[] = $news;
             }
         }
         return view('newsOneCategory',[
