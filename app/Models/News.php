@@ -15,7 +15,6 @@ class News
         return self::$news;
     }
     public static function addNews ($array){
-        dd($array);
         $json = file_get_contents("./news.json");
         self::$news = json_decode($json, true);
 
