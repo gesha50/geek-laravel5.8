@@ -10,7 +10,7 @@
 
             </div>
             <div class="col">
-                <form method="POST" action="{{ route('admin.news.add') }}">
+                <form method="POST" action="{{ route('admin.news.add') }}" enctype="multipart/form-data">
 
                     @csrf
 
@@ -36,6 +36,9 @@
                         <input name="isPrivate" type="checkbox" class="custom-control-input" id="customSwitch1">
                         <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>
                     </div>
+                    <input type="file" class="form-control-file"
+                           id="exampleFormControlFile1" name="image"
+                            accept="image/*" >
                     <button type="submit" class="btn btn-success">Добавить новость</button>
                 </form>
             </div>

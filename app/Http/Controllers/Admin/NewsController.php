@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -32,6 +33,7 @@ class NewsController extends Controller
     public function add (Request $request) {
 
         if ($request->method() == 'POST'){
+            Storage::disk('public')->putFile('', $request->file('image'));
             News::addNews($request->only('title', 'description', 'isPrivate', 'categories'));
 //            $request->flash();
             return redirect(route('admin.news.allNews'));
