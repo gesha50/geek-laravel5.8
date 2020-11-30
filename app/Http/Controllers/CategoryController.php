@@ -7,16 +7,8 @@ use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseWithCalcController
 {
-    //реализация калькулятора
-    protected $calc;
-
-    public function __construct()
-    {
-        //реализация калькулятора
-        $this->calc = Calc::createCalc();
-    }
 
     public function getCategory() {
         //реализация калькулятора

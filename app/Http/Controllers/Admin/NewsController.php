@@ -32,7 +32,7 @@ class NewsController extends Controller
     public function add (Request $request) {
 
         if ($request->method() == 'POST'){
-            News::addNews($request->only('title', 'description', 'isPrivate'));
+            News::addNews($request->only('title', 'description', 'isPrivate', 'categories'));
             return redirect(route('admin.news.allNews'));
         } else {
             return view('admin.add',[

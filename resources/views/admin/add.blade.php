@@ -22,18 +22,15 @@
                         <label for="formGroupExampleInput2">Текст Новости</label>
                         <input name="description" type="text" class="form-control height" id="formGroupExampleInput2" placeholder="Победа Российской сборной...">
                     </div>
+                    <select name="categories" class="form-control">
+                        @for ($i = 1; $i < (count($newsCategory)+1); $i++)
+                            <option value="{{ $i }}">{{  $newsCategory[$i] }}</option>
+                        @endfor
+                    </select>
                     <div class="custom-control custom-switch">
                         <input name="isPrivate" type="checkbox" class="custom-control-input" id="customSwitch1">
                         <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>
                     </div>
-{{--                    <div class="custom-control custom-radio">--}}
-{{--                        <input type="radio" id="customRadio1" name="private" class="custom-control-input">--}}
-{{--                        <label class="custom-control-label" for="customRadio1">Приватная</label>--}}
-{{--                    </div>--}}
-{{--                    <div class="custom-control custom-radio">--}}
-{{--                        <input type="radio" id="customRadio2" name="public" class="custom-control-input" checked>--}}
-{{--                        <label class="custom-control-label" for="customRadio2">Публичная</label>--}}
-{{--                    </div>--}}
                     <button type="submit" class="btn btn-success">Добавить новость</button>
                 </form>
             </div>

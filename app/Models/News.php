@@ -26,7 +26,7 @@ class News
         $id = self::getId() + 1;
         $arr = [
             'id' => $id,
-            'category_id' => '1',
+            'category_id' => $array['categories'],
             'isPrivate' => $isPrivate,
             'title' => $array['title'],
             'description' => $array['description']
