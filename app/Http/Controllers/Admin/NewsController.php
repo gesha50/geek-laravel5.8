@@ -33,7 +33,9 @@ class NewsController extends Controller
     public function add (Request $request) {
 
         if ($request->method() == 'POST'){
-            Storage::disk('public')->putFile('', $request->file('image'));
+            if ($request->hasFile('image')){
+                Storage::disk('public')->putFile('', $request->file('image'));
+            }
             News::addNews($request->only('title', 'description', 'isPrivate', 'categories'));
 //            $request->flash();
             return redirect(route('admin.news.allNews'));
