@@ -3,20 +3,24 @@
 
 namespace App\Models;
 
+use DB;
 
 class News
 {
-    static public $news = [];
 
     public static function getNews () {
-
-        $json = file_get_contents("./news.json");
-        self::$news = json_decode($json, true);
-        return self::$news;
+        return  DB::select('SELECT * FROM news');
     }
-    public static function addNews ($array){
-        $json = file_get_contents("./news.json");
-        self::$news = json_decode($json, true);
+
+    public static function getNewsById ($id) {
+        $result =  DB::selectOne('SELECT * FROM news WHERE id = :id', ['id' => $id]);
+        return $result;
+    }
+
+    public static function addNews ($array, $img){
+
+//        $json = file_get_contents("./news.json");
+//        self::$news = json_decode($json, true);
 
         if (isset($array['isPrivate'])){
             $isPrivate = true;
@@ -29,12 +33,13 @@ class News
             'category_id' => $array['categories'],
             'isPrivate' => $isPrivate,
             'title' => $array['title'],
-            'description' => $array['description']
+            'description' => $array['description'],
+            'image' =>  $img
         ];
 
-        self::$news['news'][$id] = $arr;
-        file_put_contents('./news.json', json_encode(self::$news));
-        return self::$news;
+//        self::$news['news'][$id] = $arr;
+//        file_put_contents('./news.json', json_encode(self::$news));
+//        return self::$news;
     }
 
     public static function getId () {
@@ -42,11 +47,8 @@ class News
     }
 
     public static function delete ($id){
-        $json = file_get_contents("./news.json");
-        self::$news = json_decode($json, true);
-
-        unset(self::$news['news'][$id]);
-        file_put_contents('./news.json', json_encode(self::$news));
-        return self::$news;
+        $news = DB::table('news')
+            ->where('id', '=', $id)
+            ->delete();
     }
 }

@@ -2,7 +2,7 @@
 
 
 namespace App\Models;
-
+use DB;
 
 class Category
 {
@@ -19,4 +19,10 @@ class Category
         return self::CATEGORY;
     }
 
+    public static function getOneCategory($id) {
+        $news = DB::table('news')
+            ->where('category_id', '=', $id)
+            ->get();
+        return $news;
+    }
 }

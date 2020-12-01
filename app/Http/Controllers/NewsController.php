@@ -17,9 +17,9 @@ class NewsController extends Controller
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNews();
+        $oneNews = News::getNewsById($id);
         return view('oneNews',[
-            'oneNews' => $oneNews['news'][$id],
+            'oneNews' => $oneNews,
             'newsCategory' => CATEGORY::getCategory()
         ]);
     }

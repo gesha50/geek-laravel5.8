@@ -11,9 +11,11 @@ class CategoryController extends BaseWithCalcController
 {
 
     public function getCategory() {
+
         //реализация калькулятора
-        $res = $this->calc->add(5)->sub(1)->getResult();
-//        dd($res);
+       // $res = $this->calc->add(5)->sub(1)->getResult();
+        ////////////////////////
+
         $category = CATEGORY::getCategory();
         return view('category',[
             'newsCategory' => $category
@@ -22,13 +24,7 @@ class CategoryController extends BaseWithCalcController
 
     public function getOneCategory ($id) {
         $category = CATEGORY::getCategory();
-        $allNews = News::getNews()['news'];
-        $oneCategory = [];
-        foreach ($allNews as $news){
-            if($news['category_id'] == $id){
-                $oneCategory[] = $news;
-            }
-        }
+        $oneCategory = CATEGORY::getOneCategory($id);
         return view('newsOneCategory',[
             'oneCategory' => $oneCategory,
             'newsCategory' => $category
