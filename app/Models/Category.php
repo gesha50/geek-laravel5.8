@@ -6,17 +6,9 @@ use DB;
 
 class Category
 {
-    const CATEGORY = [
-
-        1 => 'Спорт',
-        2 => 'Образование',
-        3 => 'Отдых',
-        4 => 'Пандемия',
-        5 => 'Политика',
-    ];
 
     public static function getCategory () {
-        return self::CATEGORY;
+        return DB::select('SELECT * FROM category');
     }
 
     public static function getOneCategory($id) {

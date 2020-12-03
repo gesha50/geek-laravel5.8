@@ -21,19 +21,25 @@
                                placeholder="Хоккоей ЧМ-2020" value="{{ old('title') }}">
                     </div>
                     <div class="form-group">
+                        <label for="formGroupExampleInput1">Короткое описание</label>
+                        <input name="spoiler" type="text"
+                               class="form-control spoiler_height" id="formGroupExampleInput1"
+                               placeholder="Победа команды в Кубке Гагарина..." value="{{ old('spoiler') }}">
+                    </div>
+                    <div class="form-group">
                         <label for="formGroupExampleInput2">Текст Новости</label>
                         <input name="description" type="text"
                                class="form-control height" id="formGroupExampleInput2"
-                               placeholder="Победа Российской сборной..." value="{{ old('description') }}">
+                               placeholder="Длинное описание..." value="{{ old('description') }}">
                     </div>
                     <label for="formSelectCategories">Выберите категорию:</label>
                     <select id="formSelectCategories" name="categories" class="form-control">
-                        @for ($i = 1; $i < (count($newsCategory)+1); $i++)
-                            <option value="{{ $i }}" @if(old('categories') == $i) selected @endif >{{  $newsCategory[$i] }}</option>
-                        @endfor
+                        @foreach($newsCategory as $category)
+                            <option value="{{ $category->id }}" @if(old('categories') == $category->id) selected @endif >{{  $category->title }}</option>
+                        @endforeach
                     </select>
                     <div class="custom-control custom-switch m-2">
-                        <input name="isPrivate" type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <input name="is_private" type="checkbox" class="custom-control-input" id="customSwitch1">
                         <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>
                     </div>
                     <input type="file" class="form-control-file"
