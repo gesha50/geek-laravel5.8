@@ -4,7 +4,10 @@
 
 @section('content')
     <h1>Категории</h1>
-        @for ($i = 0; $i < count($newsCategory); $i++)
-            <a class="btn btn-link" href="{{ route('category.id', $i) }}">{{  $newsCategory[$i] }}</a>
-        @endfor
+    <ul class="list-group list-group-horizontal">
+        @foreach($newsCategory as $category)
+            <a class="list-group-item list-group-item-action" href="{{ route('category.id', $category->id) }}">{{  $category->title }}</a>
+        @endforeach
+    </ul>
+
 @endsection

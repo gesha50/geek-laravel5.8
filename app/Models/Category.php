@@ -2,21 +2,19 @@
 
 
 namespace App\Models;
-
+use DB;
 
 class Category
 {
-    const CATEGORY = [
-        0 => 'Политика',
-        1 => 'Спорт',
-        2 => 'Образование',
-        3 => 'Отдых',
-        4 => 'Пандемия',
-
-    ];
 
     public static function getCategory () {
-        return self::CATEGORY;
+        return DB::select('SELECT * FROM category');
     }
 
+    public static function getOneCategory($id) {
+        $news = DB::table('news')
+            ->where('category_id', '=', $id)
+            ->get();
+        return $news;
+    }
 }

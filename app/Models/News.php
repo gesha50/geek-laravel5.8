@@ -3,50 +3,49 @@
 
 namespace App\Models;
 
+use DB;
 
 class News
 {
-    const NEWS = [
-        [
-            'id' => '0',
-            'category_id' => '2',
-            'title' => 'Образование',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '1',
-            'category_id' => '3',
-            'title' => 'Отдых',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '2',
-            'category_id' => '1',
-            'title' => 'Спорт',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '3',
-            'category_id' => '4',
-            'title' => 'Пандемия',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '4',
-            'category_id' => '0',
-            'title' => 'Политика',
-            'description' => 'очень интересная новость!'
-        ],
-        [
-            'id' => '5',
-            'category_id' => '1',
-            'title' => 'Спорт 2',
-            'description' => 'очень интересная новость!'
-        ],
-    ];
 
     public static function getNews () {
-        return self::NEWS;
+        return  DB::select('SELECT * FROM news order by id DESC');
     }
 
+    public static function getNewsById ($id) {
+        $result =  DB::selectOne('SELECT * FROM news WHERE id = :id', ['id' => $id]);
+        return isset($result) ? $result : null;
+    }
+
+    public static function addNews ($array, $img){
+
+        if (isset($array['is_private'])){
+            $isPrivate = true;
+        } else {
+            $isPrivate = false;
+        }
+
+        $arr = [
+            'category_id' => $array['categories'],
+            'image' =>  $img,
+            'is_private' => $isPrivate,
+            'title' => $array['title'],
+            'spoiler' => $array['spoiler'],
+            'description' => $array['description'],
+        ];
+
+        return DB::insert("insert into news
+                    (category_id, image, is_private, title, spoiler, description)
+                    values (:category_id, :image, :is_private, :title, :spoiler, :description)", $arr);
+    }
+
+//    public static function getId () {
+//        return DB::table('news')->max('id');
+//    }
+
+    public static function delete ($id){
+        $news = DB::table('news')
+            ->where('id', '=', $id)
+            ->delete();
+    }
 }
