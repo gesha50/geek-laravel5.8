@@ -39,7 +39,7 @@ class News
                     values (:category_id, :image, :is_private, :title, :spoiler, :description)", $arr);
     }
 
-//    public static function getId () {
+//    public static function getMaxId () {
 //        return DB::table('news')->max('id');
 //    }
 
