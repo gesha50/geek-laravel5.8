@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 use DB;
 
 class NewsController extends Controller
@@ -37,14 +37,14 @@ class NewsController extends Controller
     public function add (Request $request) {
 
         if ($request->method() == 'POST'){
-            $img = 'http://dummyimage.com/250';
-            if ($request->hasFile('image')){
-                $path = Storage::putFile('public', $request->file('image'));
-                $img = Storage::url($path);
-            }
 
-            News::addNews($request->only('title', 'description', 'is_private', 'categories', 'spoiler'), $img);
-//            $request->flash();
+            $img = '';
+            if ($request->hasFile('image')){
+                $path = \Storage::putFile('public', $request->file('image'));
+                $img = \Storage::url($path);
+            }
+            News::addNews($request->all(), $img);
+            $request->flash();
             return redirect(route('admin.news.allNews'));
         } else {
             $arr = CATEGORY::getCategory();

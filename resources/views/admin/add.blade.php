@@ -11,9 +11,7 @@
             </div>
             <div class="col">
                 <form method="POST" action="{{ route('admin.news.add') }}" enctype="multipart/form-data">
-
                     @csrf
-
                     <div class="form-group">
                         <label for="formGroupExampleInput">Заголовок</label>
                         <input name="title" type="text"
@@ -33,7 +31,7 @@
                                placeholder="Длинное описание..." value="{{ old('description') }}">
                     </div>
                     <label for="formSelectCategories">Выберите категорию:</label>
-                    <select id="formSelectCategories" name="categories" class="form-control">
+                    <select id="formSelectCategories" name="category_id" class="form-control">
                         @foreach($newsCategory as $category)
                             <option value="{{ $category->id }}" @if(old('categories') == $category->id) selected @endif >{{  $category->title }}</option>
                         @endforeach

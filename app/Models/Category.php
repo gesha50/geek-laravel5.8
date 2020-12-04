@@ -17,4 +17,8 @@ class Category
             ->get();
         return $news;
     }
+
+    public static function getMaxId () {
+        return DB::table('category')->max('id');
+    }
 }
