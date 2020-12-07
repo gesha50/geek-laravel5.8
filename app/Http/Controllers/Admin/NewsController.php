@@ -78,6 +78,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
+        dd('ok');
         return view('admin.edit', [
                 'newsCategory' => CATEGORY::getCategory(),
                 'isAdmin' => true,

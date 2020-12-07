@@ -21,26 +21,22 @@ class addToDBTest extends TestCase
      */
     public function testAddToDB()
     {
-        $maxCategoryId = Category::getMaxId();
-        $data = [
-            'category_id' => rand(1,$maxCategoryId),
-            'image' => '',
-            'is_private' => 1,
-            'title' => $this->faker->sentence(rand(3,5)),
-            'spoiler' => $this->faker->text(rand(200,220)),
-            'description' => $this->faker->text(rand(1000,2000))
-        ];
+        $data = factory(\App\Models\News::class)->make()->toArray();
 
-        $response = $this->post('/admin/news/add', $data);
+        $response = $this->post(route('admin.news.store'), $data);
         $response->assertStatus(302);
         $this->assertDatabaseHas('news', $data);
     }
 
     public function testEditNewsCorrectInDB()
     {
-       $data = factory(\App\Models\News::class)->make()->toArray();
-       $response = $this->post('/admin/news/1/edit', $data);
-//       $response->assertStatus(302);
-       $this->assertDatabaseHas('news', $data);
+       $news = factory(\App\Models\News::class)->make()->toArray();
+//       dump($news);
+       $response1 = $this->post(route('admin.news.store'), $news);
+       $response1->assertStatus(302);
+
+       $response = $this->patch(route('admin.news.update', $news), $news);
+       $response->assertStatus(302);
+       $this->assertDatabaseHas('news', $news);
     }
 }
