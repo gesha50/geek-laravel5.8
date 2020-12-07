@@ -7,7 +7,12 @@
         <p class="card-text">{{ $item->spoiler }}</p>
         @if(isset($isAdmin))
             <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-warning">Редактировать</a>
-            <a href="{{ route('admin.news.destroy', $item->id) }}" class="btn btn-danger" >x</a>
+
+            <form class="btn" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-danger" type="submit">x</button>
+            </form>
         @else
             <a href="{{ route('news.id', $item) }}" class="btn btn-primary">Читать подробнее...</a>
         @endif

@@ -18,6 +18,10 @@ class News extends Model
         'description'
     ];
 
+    public function category () {
+        return $this->belongsTo('App\Models\Category', 'category_id', 'id');
+    }
+
     public static function addNews ($array, $img){
         if (isset($array['is_private'])){
             $isPrivate = 1;

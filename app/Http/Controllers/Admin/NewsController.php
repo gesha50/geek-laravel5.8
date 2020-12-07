@@ -63,7 +63,6 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        dd('noooooo');
         return view('admin.oneNews', [
             'oneNews' => $news,
             'newsCategory' => CATEGORY::getCategory(),
@@ -128,45 +127,7 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        dd($news);
-        News::where('id', $news->id())->delete();
+        News::where('id', $news->id)->delete();
         return redirect(route('admin.news.index'));
     }
 }
-
-
-//    public function edit(Request $request, News $news)
-//    {
-//
-//        if ($request->method() == 'POST') {
-//            $request->flash();
-//            $newsItem = $request->only([
-//                'category_id',
-//                'is_private',
-//                'title',
-//                'spoiler',
-//                'description',
-//            ]);
-//
-////            $newsItem['image'] = '';
-//            if ($request->hasFile('image')) {
-//                $path = \Storage::putFile('public', $request->file('image'));
-//                $newsItem['image'] = \Storage::url($path);
-//            }
-//            if (isset($newsItem['is_private'])) {
-//                $newsItem['is_private'] = 1;
-//            } else {
-//                $newsItem['is_private'] = 0;
-//            }
-//            $news->fill($newsItem);
-//            $news->save();
-//
-//            return redirect(route('admin.news.allNews'));
-//        } else {
-//            return view('admin.edit', [
-//                'newsCategory' => CATEGORY::getCategory(),
-//                'isAdmin' => true,
-//                'news' => $news
-//            ]);
-//        }
-//    }

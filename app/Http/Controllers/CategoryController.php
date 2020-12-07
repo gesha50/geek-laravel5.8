@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\News;
 use Illuminate\Http\Request;
 
-class CategoryController extends BaseWithCalcController
+class CategoryController extends Controller
 {
 
     public function getCategory() {
@@ -24,9 +24,13 @@ class CategoryController extends BaseWithCalcController
 
     public function getOneCategory ($id) {
         $category = CATEGORY::getCategory();
-        $oneCategory = CATEGORY::getOneCategory($id);
+
+        $news = News::query()->whereHas('category', function ($query) use ($id){
+            $query->where('category_id', $id);
+        })->get();
+
         return view('newsOneCategory',[
-            'oneCategory' => $oneCategory,
+            'oneCategory' => $news,
             'newsCategory' => $category
         ]);
     }

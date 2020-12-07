@@ -19,7 +19,7 @@ class addToDBTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testAddToDB()
     {
         $maxCategoryId = Category::getMaxId();
         $data = [
@@ -34,5 +34,13 @@ class addToDBTest extends TestCase
         $response = $this->post('/admin/news/add', $data);
         $response->assertStatus(302);
         $this->assertDatabaseHas('news', $data);
+    }
+
+    public function testEditNewsCorrectInDB()
+    {
+       $data = factory(\App\Models\News::class)->make()->toArray();
+       $response = $this->post('/admin/news/1/edit', $data);
+//       $response->assertStatus(302);
+       $this->assertDatabaseHas('news', $data);
     }
 }

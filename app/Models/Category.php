@@ -3,9 +3,11 @@
 
 namespace App\Models;
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
-class Category
+class Category extends Model
 {
+    protected $table = 'category';
 
     public static function getCategory () {
         return DB::select('SELECT * FROM category');
