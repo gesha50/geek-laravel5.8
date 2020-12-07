@@ -12,10 +12,10 @@
                     <a class="nav-link" href="{{ route('admin.index') }}">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news.allNews') }}">Новости</a>
+                    <a class="nav-link" href="{{ route('admin.news.index') }}">Новости</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news.add') }}">Добавить</a>
+                    <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить</a>
                 </li>
             @else
                 <li class="nav-item active">

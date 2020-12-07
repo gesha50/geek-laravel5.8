@@ -9,6 +9,7 @@
         @include('news.cart')
         @endforeach
     </div>
+    {{ $news->links() }}
 @endsection
 
 

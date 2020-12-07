@@ -4,18 +4,19 @@
 namespace App\Models;
 
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
-class News
+class News extends Model
 {
-
-    public static function getNews () {
-        return  DB::select('SELECT * FROM news order by id DESC');
-    }
-
-    public static function getNewsById ($id) {
-        $result =  DB::selectOne('SELECT * FROM news WHERE id = :id', ['id' => $id]);
-        return isset($result) ? $result : null;
-    }
+    protected $table = 'news';
+    protected $fillable = [
+        'image',
+        'category_id',
+        'is_private',
+        'title',
+        'spoiler',
+        'description'
+    ];
 
     public static function addNews ($array, $img){
         if (isset($array['is_private'])){
@@ -34,15 +35,5 @@ class News
         return DB::insert("insert into news
                     (category_id, image, is_private, title, spoiler, description)
                     values (:category_id, :image, :is_private, :title, :spoiler, :description)", $arr);
-    }
-
-//    public static function getMaxId () {
-//        return DB::table('news')->max('id');
-//    }
-
-    public static function delete ($id){
-        $news = DB::table('news')
-            ->where('id', '=', $id)
-            ->delete();
     }
 }
