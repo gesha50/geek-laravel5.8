@@ -21,23 +21,4 @@ class News extends Model
     public function category () {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
-
-    public static function addNews ($array, $img){
-        if (isset($array['is_private'])){
-            $isPrivate = 1;
-        } else {
-            $isPrivate = 0;
-        }
-        $arr = [
-            'category_id' => $array['category_id'],
-            'image' =>  $img,
-            'is_private' => $isPrivate,
-            'title' => $array['title'],
-            'spoiler' => $array['spoiler'],
-            'description' => $array['description'],
-        ];
-        return DB::insert("insert into news
-                    (category_id, image, is_private, title, spoiler, description)
-                    values (:category_id, :image, :is_private, :title, :spoiler, :description)", $arr);
-    }
 }

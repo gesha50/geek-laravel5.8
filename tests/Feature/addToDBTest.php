@@ -30,10 +30,8 @@ class addToDBTest extends TestCase
 
     public function testEditNewsCorrectInDB()
     {
-       $news = factory(\App\Models\News::class)->make()->toArray();
-//       dump($news);
-       $response1 = $this->post(route('admin.news.store'), $news);
-       $response1->assertStatus(302);
+       $news = factory(\App\Models\News::class)->create()->toArray();
+        dump($news);
 
        $response = $this->patch(route('admin.news.update', $news), $news);
        $response->assertStatus(302);

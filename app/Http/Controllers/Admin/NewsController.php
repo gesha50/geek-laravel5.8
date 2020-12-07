@@ -103,7 +103,7 @@ class NewsController extends Controller
             'spoiler',
             'description',
         ]);
-
+        dump($request->all());
 //            $newsItem['image'] = '';
         if ($request->hasFile('image')) {
             $path = \Storage::putFile('public', $request->file('image'));
