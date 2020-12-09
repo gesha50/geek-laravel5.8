@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\UpdateNewsRequest;
 use App\Models\News;
 use App\Models\CATEGORY;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class NewsController extends Controller
     public function index()
     {
         return view('admin.allNews', [
-            'news' => News::paginate(4),
+            'news' => News::orderByDesc('id')->paginate(4),
             'newsCategory' => CATEGORY::getCategory(),
             'isAdmin' => true
         ]);
@@ -45,12 +46,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $img = '';
+        $news = News::create($request->all());
         if ($request->hasFile('image')) {
             $path = \Storage::putFile('public', $request->file('image'));
-            $img = \Storage::url($path);
+            $news->image = \Storage::url($path);
+            $news->save();
         }
-        News::addNews($request->all(), $img);
         $request->flash();
         return redirect(route('admin.news.index'));
     }
@@ -78,7 +79,7 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        dd('ok');
+
         return view('admin.edit', [
                 'newsCategory' => CATEGORY::getCategory(),
                 'isAdmin' => true,
@@ -93,30 +94,17 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, News $news)
+    public function update(UpdateNewsRequest $request, News $news)
     {
+//        $this->validate($request, News::rules());
+
+        $news->update($request->all());
         $request->flash();
-        $newsItem = $request->only([
-            'category_id',
-            'is_private',
-            'title',
-            'spoiler',
-            'description',
-        ]);
-        dump($request->all());
-//            $newsItem['image'] = '';
         if ($request->hasFile('image')) {
             $path = \Storage::putFile('public', $request->file('image'));
-            $newsItem['image'] = \Storage::url($path);
+            $news->image = \Storage::url($path);
+            $news->save();
         }
-        if (isset($newsItem['is_private'])) {
-            $newsItem['is_private'] = 1;
-        } else {
-            $newsItem['is_private'] = 0;
-        }
-        $news->fill($newsItem);
-        $news->save();
-
         return redirect(route('admin.news.index'));
     }
 
@@ -128,7 +116,7 @@ class NewsController extends Controller
      */
     public function destroy(News $news)
     {
-        News::where('id', $news->id)->delete();
-        return redirect(route('admin.news.index'));
+        $news->delete();
+        return redirect(route('admin.news.index'))->with('warning', 'Новость успешно удалена');
     }
 }

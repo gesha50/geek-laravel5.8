@@ -11,7 +11,7 @@
             <form class="btn" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
                 @method('DELETE')
                 @csrf
-                <button class="btn btn-danger" type="submit">x</button>
+                <button class="btn btn-danger" type="submit" >x</button>
             </form>
         @else
             <a href="{{ route('news.id', $item) }}" class="btn btn-primary">Читать подробнее...</a>

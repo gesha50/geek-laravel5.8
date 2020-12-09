@@ -18,6 +18,13 @@
                     @include('inc.aside')
                 </div>
                 <div class="col-md-10 text-center">
+                    <div class="container">
+                        <div class="row justify-content-end">
+                            <div class="col-4">
+                                @include('admin._partials.flash-message')
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                 </div>
             </div>

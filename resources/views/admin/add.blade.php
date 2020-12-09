@@ -36,11 +36,19 @@
                             <option value="{{ $category->id }}" @if(old('categories') == $category->id) selected @endif >{{  $category->title }}</option>
                         @endforeach
                     </select>
-                    <div class="custom-control custom-switch m-2">
-                        <input name="is_private" type="checkbox" class="custom-control-input" id="customSwitch1">
-                        <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="is_private" id="exampleRadios1" value="1">
+                        <label class="form-check-label" for="exampleRadios1">Приватная</label>
                     </div>
-                    <input type="file" class="form-control-file"
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="is_private" id="exampleRadios1" value="0" checked>
+                        <label class="form-check-label" for="exampleRadios1">Публичная</label>
+                    </div>
+{{--                    <div class="custom-control custom-switch m-2">--}}
+{{--                        <input name="is_private" type="radio" class="custom-control-input" id="customSwitch1">--}}
+{{--                        <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>--}}
+{{--                    </div>--}}
+                    <input type="file" class="form-control-file m-2"
                            id="exampleFormControlFile1" name="image"
                             accept="image/*" >
                     <button type="submit" class="btn btn-success">Добавить новость</button>

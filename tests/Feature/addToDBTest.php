@@ -30,11 +30,25 @@ class addToDBTest extends TestCase
 
     public function testEditNewsCorrectInDB()
     {
-       $news = factory(\App\Models\News::class)->create()->toArray();
-        dump($news);
+       $news = factory(\App\Models\News::class)->state('withCategoryID')->create();
+        $newTitle = $this->faker->sentence(rand(3,10));
+        $newSpoiler = $this->faker->text(rand(100,300));
 
-       $response = $this->patch(route('admin.news.update', $news), $news);
+        $data =  [
+        'category_id' => 1,   // rand(1, $maxCategoryId)
+//        'image' => "",
+        'is_private' => rand(0,1),
+        'title' => $newTitle,
+        'spoiler' => $newSpoiler,
+        'description' => $news->description
+        ];
+
+        $response = $this->patch(route('admin.news.update', $news), $data);
+
        $response->assertStatus(302);
-       $this->assertDatabaseHas('news', $news);
+
+        $this->assertDatabaseMissing('news', $news->toArray());
+
+        $this->assertDatabaseHas('news', $data);
     }
 }
