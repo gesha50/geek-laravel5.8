@@ -13,7 +13,6 @@ class AdminNewsDuskTest extends DuskTestCase
 
     /**
      * A basic browser test example.
-     * @test
      * @return void
      */
     public function testAdminCanEditNews()

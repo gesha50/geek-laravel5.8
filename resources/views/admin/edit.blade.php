@@ -64,11 +64,7 @@
                                @if(old('is_private', $news->is_private) == false) checked @endif>
                         <label class="form-check-label" for="exampleRadios1">Публичная</label>
                     </div>
-{{--                    <div class="custom-control custom-switch m-2">--}}
-{{--                        <input name="is_private" type="radio" class="custom-control-input" id="customSwitch1"--}}
-{{--                        @if(old('is_private', $news->is_private)) checked @endif>--}}
-{{--                        <label class="custom-control-label" for="customSwitch1">Приватная ли новость?</label>--}}
-{{--                    </div>--}}
+
                     <input type="file" class="form-control-file m-2"
                            id="exampleFormControlFile1" name="image"
                            accept="image/*" value="/storage/4TQOnbJIAvokPHs63oA9LL0TKK4QKUJ2cc6Rq6Yu.jpeg}">
