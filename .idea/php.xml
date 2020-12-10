@@ -202,7 +202,7 @@
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings configuration_file_path="$PROJECT_DIR$/phpunit.xml" custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" use_configuration_file="true" />
+      <phpunit_by_interpreter interpreter_id="8466a1d4-63b1-468e-bb77-f0cfbf9de15f" configuration_file_path="/home/vagrant/code/geek-laravel5.8/phpunit.xml" custom_loader_path="/home/vagrant/code/geek-laravel5.8/vendor/autoload.php" use_configuration_file="true" />
     </phpunit_settings>
   </component>
 </project>

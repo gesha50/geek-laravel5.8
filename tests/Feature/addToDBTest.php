@@ -21,8 +21,8 @@ class addToDBTest extends TestCase
      */
     public function testAddToDB()
     {
-        $data = factory(\App\Models\News::class)->make()->toArray();
-
+        $data = factory(\App\Models\News::class)->state('withCategoryID')->make()->toArray();
+        dd($data);
         $response = $this->post(route('admin.news.store'), $data);
         $response->assertStatus(302);
         $this->assertDatabaseHas('news', $data);

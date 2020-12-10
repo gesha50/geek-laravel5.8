@@ -13,7 +13,7 @@ class AdminNewsDuskTest extends DuskTestCase
 
     /**
      * A basic browser test example.
-     *
+     * @test
      * @return void
      */
     public function testAdminCanEditNews()
@@ -24,6 +24,17 @@ class AdminNewsDuskTest extends DuskTestCase
             $browser->visit(route('admin.news.edit', $news))
                     ->assertSee('Редактировать Новость')
                     ->screenshot('01-редактирование')
+                    ->type('@title', 'Привет из Даска')
+                    ->clear('@spoiler')
+                    ->screenshot('02-редактирование')
+                    ->press('@submit')
+                    ->pause(1000)
+                    ->screenshot('03-редактирование')
+                    ->assertSee('Поле Краткое описание обязательно для заполнения')
+                    ->type('@spoiler', 'Текст заполнен из Даска')
+                    ->press('@submit')
+                    ->waitForText('Новости')
+                    ->screenshot('04-редактирование')
             ;
         });
     }

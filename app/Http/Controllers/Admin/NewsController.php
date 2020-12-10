@@ -79,7 +79,6 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-
         return view('admin.edit', [
                 'newsCategory' => CATEGORY::getCategory(),
                 'isAdmin' => true,
@@ -96,7 +95,6 @@ class NewsController extends Controller
      */
     public function update(UpdateNewsRequest $request, News $news)
     {
-//        $this->validate($request, News::rules());
 
         $news->update($request->all());
         $request->flash();

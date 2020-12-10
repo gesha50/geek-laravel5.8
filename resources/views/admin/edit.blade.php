@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput">Заголовок</label>
-                        <input name="title" type="text"
+                        <input name="title" type="text" dusk="title"
                                class="form-control @error('title') is-invalid @enderror"
                                id="formGroupExampleInput"
                                value="{{ old('title' , $news->title) }}">
@@ -27,7 +27,7 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput1">Короткое описание</label>
-                        <input name="spoiler" type="text"
+                        <input name="spoiler" type="text" dusk="spoiler"
                                class="form-control spoiler_height @error('spoiler') is-invalid @enderror"
                                id="formGroupExampleInput1"
                                value="{{ old('spoiler' , $news->spoiler) }}">
@@ -38,7 +38,7 @@
 
                     <div class="form-group">
                         <label for="formGroupExampleInput2">Текст Новости</label>
-                        <input name="description" type="text"
+                        <input name="description" type="text" dusk="description"
                                class="form-control height @error('description') is-invalid @enderror"
                                id="formGroupExampleInput2"
                                value="{{ old('description' , $news->description) }}">
@@ -73,7 +73,7 @@
                            id="exampleFormControlFile1" name="image"
                            accept="image/*" value="/storage/4TQOnbJIAvokPHs63oA9LL0TKK4QKUJ2cc6Rq6Yu.jpeg}">
                     <img class="m-2" width="200px" src="{{old('image', $news->image) }}" alt="">
-                    <button type="submit" class="btn btn-success">Внести изменения</button>
+                    <button dusk="submit" type="submit" class="btn btn-success">Внести изменения</button>
                 </form>
                 </div>
                 </div>
