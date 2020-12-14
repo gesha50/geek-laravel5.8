@@ -6,23 +6,24 @@ use App\Models\News;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
+use Throwable;
 
 class AdminNewsDuskTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
     /**
-     * A basic browser test example.
+     * @test
      * @return void
+     * @throws Throwable
      */
-    public function testAdminCanEditNews()
+    public function testAdminEditNews()
     {
         $news = factory(News::class)->state('withCategoryID')->create();
-
         $this->browse(function (Browser $browser) use ($news) {
             $browser->visit(route('admin.news.edit', $news))
-                    ->assertSee('Редактировать Новость')
-                    ->screenshot('01-редактирование')
+                ->assertSee('Редактировать Новость')
+                ->screenshot('01-редактирование')
                     ->type('@title', 'Привет из Даска')
                     ->clear('@spoiler')
                     ->screenshot('02-редактирование')

@@ -18,7 +18,9 @@ class ExampleTest extends DuskTestCase
     public function testBasicExample()
     {
         $news = factory(News::class)->state('withCategoryID')->create();
-
+//        dump(app()->environment());
+//        dump(\DB::connection()->getName());
+//        dd(\DB::connection()->getDatabaseName());
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
                     ->assertSee('Главная')

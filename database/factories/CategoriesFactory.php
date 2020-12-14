@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'id' => 1,
-        'title' => 'Спорт',
-        'slug' => 'sport',
+        'title' => 'Пандемия',
+        'slug' => 'pandemic',
     ];
 });

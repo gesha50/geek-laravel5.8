@@ -4,7 +4,7 @@
 
 
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'IndexController@index')->name('home');
 
 Route::get('/info', 'InfoController@index')->name('info');
 
@@ -19,7 +19,12 @@ Route::group(["prefix" => "category", "as" => "category"], function (){
     Route::get('/{id}', 'CategoryController@getOneCategory')->name('.id');
 });
 
-Route::group(["prefix" => "/admin", "namespace" => "Admin", "as" => "admin."], function (){
+Route::group(["prefix" => "/admin",
+    "namespace" => "Admin",
+    "as" => "admin.",
+    "middleware" => ['auth', 'role:admin']
+    ],
+    function (){
 
 //    Route::group(["prefix" => "news", "as" => "news."], function (){
 //        Route::get('/', 'NewsController@allNews')->name('allNews');
@@ -30,8 +35,10 @@ Route::group(["prefix" => "/admin", "namespace" => "Admin", "as" => "admin."], f
 //    });
 
     Route::resource('news', 'NewsController');
+    Route::resource('users', 'UserController');
 
-    Route::get('/', 'IndexController@index')->name('index');
+
+        Route::get('/', 'IndexController@index')->name('index');
 });
 
 // для вывода изображений
@@ -50,3 +57,7 @@ Route::get('storage/{filename}', function ($filename){
 
 
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

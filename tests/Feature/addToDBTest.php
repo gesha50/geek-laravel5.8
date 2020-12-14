@@ -30,9 +30,9 @@ class addToDBTest extends TestCase
     public function testEditNewsCorrectInDB()
     {
        $news = factory(\App\Models\News::class)->state('withCategoryID')->create();
+
         $newTitle = $this->faker->sentence(rand(3,10));
         $newSpoiler = $this->faker->text(rand(100,300));
-
         $data =  [
         'category_id' => 1,   // rand(1, $maxCategoryId)
 //        'image' => "",
