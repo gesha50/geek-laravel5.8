@@ -15,9 +15,12 @@
                     <a class="nav-link" href="{{ route('admin.news.index') }}">Новости</a>
                 </li>
                 @if(Auth::user()->hasRole('admin'))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
+                    </li>
                 @endif
                 @else
                 <li class="nav-item active">
@@ -26,7 +29,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('info') }}">Информация</a>
                 </li>
-{{--                @endif--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('news') }}">Новости</a>
                 </li>

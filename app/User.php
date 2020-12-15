@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'role_id', 'email', 'password',
     ];
 
     /**
@@ -38,6 +38,11 @@ class User extends Authenticatable
     ];
 
     public function hasRole ($role) {
-        return $this->role == $role;
+        $id_role = \DB::table('role')->where('role', $role)->first();
+        return $this->role == $id_role->id;
+    }
+
+    public function role () {
+        return $this->belongsTo('App\Role', 'role', 'id');
     }
 }
