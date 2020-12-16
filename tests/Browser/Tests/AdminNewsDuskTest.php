@@ -3,6 +3,7 @@
 namespace Tests\Browser\Tests;
 
 use App\Models\News;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
@@ -19,9 +20,11 @@ class AdminNewsDuskTest extends DuskTestCase
      */
     public function testAdminEditNews()
     {
+        $user = factory(User::class)->state('withAdminRole')->create();
         $news = factory(News::class)->state('withCategoryID')->create();
-        $this->browse(function (Browser $browser) use ($news) {
-            $browser->visit(route('admin.news.edit', $news))
+        $this->browse(function (Browser $browser) use ($news, $user) {
+            $browser->loginAs($user)
+                ->visit(route('admin.news.edit', $news))
                 ->assertSee('Редактировать Новость')
                 ->screenshot('01-редактирование')
                     ->type('@title', 'Привет из Даска')

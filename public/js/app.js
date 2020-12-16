@@ -1929,11 +1929,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserEditComponent",
-  props: ['user', 'roles'],
+  props: ['initialUser', 'initialRoles'],
+  data: function data() {
+    return {
+      user: {
+        role: {
+          id: 0,
+          role: null
+        }
+      },
+      roles: {},
+      showSuccessMessage: false,
+      successMessage: '',
+      showErrorMessage: false,
+      errorMessage: ''
+    };
+  },
   mounted: function mounted() {
-    console.log(this.roles);
+    this.user = this.initialUser;
+    this.roles = this.initialRoles; // console.log(this.user.role.role)
+  },
+  methods: {
+    send: function send() {
+      var _this = this;
+
+      axios.post('/api/admin/user/edit/' + this.user.id, this.user).then(function (response) {
+        _this.showSuccessMessage = true;
+        _this.successMessage = 'Вы поменяли роль пользователя!';
+      });
+    }
   }
 });
 
@@ -37562,54 +37598,106 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "col-md-4 card m-2" }, [
-      _c("img", {
-        staticClass: "height_250",
-        attrs: { src: "#", alt: "User image" }
-      }),
-      _vm._v(" "),
-      _c("h3", { staticClass: "card-header" }, [
-        _vm._v(" " + _vm._s(_vm.user.name))
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("Почта: " + _vm._s(_vm.user.email))
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "card-text" }, [
-          _vm._v("Текущая роль: " + _vm._s(_vm.user.role.role))
+  return _c("div", { staticClass: "col-md-4 card m-2" }, [
+    _vm.showSuccessMessage
+      ? _c("div", { staticClass: "alert alert-success alert-block" }, [
+          _c(
+            "button",
+            {
+              staticClass: "close",
+              attrs: { type: "button", "data-dismiss": "alert" }
+            },
+            [_vm._v("×")]
+          ),
+          _vm._v(" "),
+          _c("strong", [_vm._v(_vm._s(_vm.successMessage))])
         ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.showErrorMessage
+      ? _c("div", { staticClass: "alert alert-danger alert-block" }, [
+          _c(
+            "button",
+            {
+              staticClass: "close",
+              attrs: { type: "button", "data-dismiss": "alert" }
+            },
+            [_vm._v("×")]
+          ),
+          _vm._v(" "),
+          _c("strong", [_vm._v(_vm._s(_vm.errorMessage))])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("img", {
+      staticClass: "height_250",
+      attrs: { src: "#", alt: "User image" }
+    }),
+    _vm._v(" "),
+    _c("h3", { staticClass: "card-header" }, [
+      _vm._v(" " + _vm._s(_vm.user.name))
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v("Почта: " + _vm._s(_vm.user.email))
       ]),
       _vm._v(" "),
-      _c("label", { attrs: { for: "formSelectCategories" } }, [
-        _vm._v("Поменять роль:")
-      ]),
-      _vm._v(" "),
-      _c(
-        "select",
-        {
-          staticClass: "form-control m-1",
-          attrs: { id: "formSelectCategories", name: "category_id" }
-        },
-        _vm._l(_vm.roles, function(role) {
-          return _c("option", { domProps: { value: role.role } }, [
-            _vm._v(_vm._s(role.role))
+      _vm.user.role.role
+        ? _c("p", { staticClass: "card-text" }, [
+            _vm._v("Текущая роль: " + _vm._s(_vm.user.role.role))
           ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success m-2",
-          attrs: { dusk: "submit", type: "submit" }
-        },
-        [_vm._v("Внести изменения")]
-      )
-    ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("label", { attrs: { for: "formSelectCategories" } }, [
+      _vm._v("Поменять роль:")
+    ]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.user.role,
+            expression: "user.role"
+          }
+        ],
+        staticClass: "form-control m-1",
+        attrs: { id: "formSelectCategories", name: "category_id" },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.$set(
+              _vm.user,
+              "role",
+              $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+            )
+          }
+        }
+      },
+      _vm._l(_vm.roles, function(role) {
+        return _c("option", { domProps: { value: role } }, [
+          _vm._v(_vm._s(role.role))
+        ])
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "button",
+      { staticClass: "btn-danger btn m-2", on: { click: _vm.send } },
+      [_vm._v("Внести изменения")]
+    )
   ])
 }
 var staticRenderFns = []

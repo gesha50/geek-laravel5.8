@@ -5,11 +5,10 @@
 @section('content')
     <h1>Новости</h1>
     <div class="d-flex flex-wrap justify-content-start row">
-
         @foreach ($users as $user)
             <user-edit-component
-                :user="{{ json_encode($user) }}"
-                :roles="{{ json_encode($roles) }}"
+                :initial-user="{{ json_encode($user) }}"
+                :initial-roles="{{ json_encode($roles) }}"
             ></user-edit-component>
         @endforeach
     </div>

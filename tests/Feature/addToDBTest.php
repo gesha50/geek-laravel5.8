@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
+use App\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -29,7 +30,11 @@ class addToDBTest extends TestCase
 
     public function testEditNewsCorrectInDB()
     {
-       $news = factory(\App\Models\News::class)->state('withCategoryID')->create();
+        $user = factory(User::class)->state('withAdminRole')->create();
+
+        $news = factory(\App\Models\News::class)->state('withCategoryID')->create();
+
+        $this->actingAs($user);
 
         $newTitle = $this->faker->sentence(rand(3,10));
         $newSpoiler = $this->faker->text(rand(100,300));

@@ -26,15 +26,17 @@ Route::group(["prefix" => "/admin",
     ],
     function (){
 
-//    Route::group(["prefix" => "news", "as" => "news."], function (){
-//        Route::get('/', 'NewsController@allNews')->name('allNews');
-//        Route::get('/{id}', 'NewsController@oneNews')->name('id')->where('id', '[0-9]+');
-//        Route::get('/delete/{id}', 'NewsController@delete')->name('delete')->where('id', '[0-9]+');
-//        Route::match(['get', 'post'],'/add', 'NewsController@add')->name('add');
-//        Route::match(['get', 'post'],'/edit/{news}', 'NewsController@edit')->name('edit');
-//    });
+    Route::group(["prefix" => "/news", "as" => "news."], function (){
+        Route::get('/', 'NewsController@index')->name('index');
+        Route::get('/create', 'NewsController@create')->name('create');
+        Route::post('/', 'NewsController@store')->name('store');
+        Route::get('/{news}', 'NewsController@show')->name('show');
+        Route::get('/{news}/edit', 'NewsController@edit')->name('edit');
+        Route::patch('/{news}', 'NewsController@update')->name('update')->middleware('news_validate');
+        Route::delete('/{news}', 'NewsController@destroy')->name('destroy');
+    });
 
-    Route::resource('news', 'NewsController');
+   // Route::resource('news', 'NewsController');
     Route::resource('users', 'UserController');
 
 
@@ -57,7 +59,7 @@ Route::get('storage/{filename}', function ($filename){
 
 
 
-
+// отключить маршрут регистрации - ['register' => false]
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
