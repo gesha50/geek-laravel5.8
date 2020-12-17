@@ -51,6 +51,11 @@
                             </div>
                         </div>
 
+                        <a class="btn btn-info m-2" href="/auth/vk">Войти через VK</a>
+
+                        <a class="btn btn-info m-2" href="/auth/facebook">Войти через FaceBook</a>
+
+
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

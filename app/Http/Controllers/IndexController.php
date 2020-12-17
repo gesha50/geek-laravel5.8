@@ -15,4 +15,13 @@ class IndexController extends Controller
             'newsCategory' => $category
         ]);
     }
+
+    public function privaci () {
+        $category = CATEGORY::getCategory();
+        return view('privaci',[
+            'newsCategory' => $category
+        ]);
+    }
+
+
 }

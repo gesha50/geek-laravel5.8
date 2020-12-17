@@ -39,8 +39,8 @@ Route::group(["prefix" => "/admin",
    // Route::resource('news', 'NewsController');
     Route::resource('users', 'UserController');
 
-
-        Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/parser', 'ParserController@index')->name('parser.index');
+    Route::get('/', 'IndexController@index')->name('index');
 });
 
 // для вывода изображений
@@ -62,4 +62,13 @@ Route::get('storage/{filename}', function ($filename){
 // отключить маршрут регистрации - ['register' => false]
 Auth::routes();
 
+Route::get('/auth/vk', 'Auth\LoginController@authVk');
+Route::get('/auth/vk/response', 'Auth\LoginController@responseVk');
+
+Route::get('/auth/facebook', 'Auth\LoginController@authFacebook');
+Route::get('/auth/facebook/response', 'Auth\LoginController@responseFacebook');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/privaci', 'IndexController@privaci')->name('privaci');
+

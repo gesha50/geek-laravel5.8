@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Repositories\UserRepositories;
+use \Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -32,8 +34,33 @@ class LoginController extends Controller
      *
      * @return void
      */
+
+    protected $userRepository;
+
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->userRepository = new UserRepositories();
+    }
+
+    public function authVk () {
+        return Socialite::driver('vkontakte')->redirect();
+    }
+
+    public function responseVk () {
+        $userData = Socialite::driver('vkontakte')->user();
+        $user = $this->userRepository->getOrCreateUserBySocData($userData, 'vkontakte');
+        \Auth::login($user);
+        return redirect('/');
+    }
+
+    public function authFacebook () {
+        return Socialite::driver('facebook')->redirect();    }
+
+    public function responseFacebook () {
+        $userData = Socialite::driver('facebook')->user();
+        $user = $this->userRepository->getOrCreateUserBySocData($userData, 'facebook');
+        \Auth::login($user);
+        return redirect('/');
     }
 }

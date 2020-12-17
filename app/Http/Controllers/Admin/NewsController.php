@@ -93,7 +93,10 @@ class NewsController extends Controller
      * @param  \App\Models\News  $news
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateNewsRequest $request, News $news)
+    // можно использовать класс Request: UpdateNewsRequest
+    //для проверки правил
+    // В данном случае используется middleware    NewsValidate
+    public function update(Request $request, News $news)
     {
 
         $news->update($request->all());

@@ -21,8 +21,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.parser.index') }}">Спарсить Новости</a>
+                    </li>
                 @endif
-                @else
+            @else
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('home') }}">Главная</a>
                 </li>
