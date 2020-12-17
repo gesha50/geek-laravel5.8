@@ -43,22 +43,6 @@ Route::group(["prefix" => "/admin",
     Route::get('/', 'IndexController@index')->name('index');
 });
 
-// для вывода изображений
-// Так как используем vagrant
-Route::get('storage/{filename}', function ($filename){
-    $path = storage_path('app/public/' . $filename);
-    if (!File::exists($path)) {
-        abort(404);
-    }
-    $file = File::get($path);
-    $type = File::mimeType($path);
-    $response = Response::make($file, 200);
-    $response->header('Content-Type', $type);
-    return $response;
-});
-
-
-
 // отключить маршрут регистрации - ['register' => false]
 Auth::routes();
 
@@ -70,5 +54,22 @@ Route::get('/auth/facebook/response', 'Auth\LoginController@responseFacebook');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/privaci', 'IndexController@privaci')->name('privaci');
+Route::get('/privacy', 'IndexController@privacy')->name('privacy');
+
+
+
+// Работает без этого благодаря php artisan storage:link
+
+//Route::get('storage/{filename}', function ($filename){
+//    $path = storage_path('app/public/' . $filename);
+//    if (!File::exists($path)) {
+//        abort(404);
+//    }
+//    $file = File::get($path);
+//    $type = File::mimeType($path);
+//    $response = Response::make($file, 200);
+//    $response->header('Content-Type', $type);
+//    return $response;
+//});
+
 

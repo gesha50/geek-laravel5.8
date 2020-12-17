@@ -16,9 +16,9 @@ class IndexController extends Controller
         ]);
     }
 
-    public function privaci () {
+    public function privacy () {
         $category = CATEGORY::getCategory();
-        return view('privaci',[
+        return view('privacy',[
             'newsCategory' => $category
         ]);
     }
