@@ -1,6 +1,6 @@
 <template>
-
-        <div class="col-md-4 card m-2">
+    <div class="d-flex flex-wrap justify-content-start row">
+        <div v-for="user in users" class="col-md-4 card m-2">
 
             <div v-if="showSuccessMessage" class="alert alert-success alert-block">
                 <button type="button" class="close" data-dismiss="alert">×</button>
@@ -21,29 +21,25 @@
                 <p v-if="user.role.role" class="card-text">Текущая роль: {{ user.role.role }}</p>
             </div>
 
-                <label for="formSelectCategories">Поменять роль:</label>
-                <select v-model="user.role" id="formSelectCategories" name="category_id" class="form-control m-1">
-                    <option v-for="role in roles" v-bind:value="role" >{{ role.role }}</option>
-                </select>
-                <button @click="send" class="btn-danger btn m-2">Внести изменения</button>
+            <label for="formSelectCategories">Поменять роль:</label>
+            <select v-model="user.role" id="formSelectCategories" name="category_id" class="form-control m-1">
+                <option v-for="role in roles" v-bind:value="role">{{ role.role }}</option>
+            </select>
+            <button @click="send" class="btn-danger btn m-2">Внести изменения</button>
         </div>
+    </div>
 </template>
 
 <script>
 export default {
     name: "UserEditComponent",
     props: [
-        'initialUser',
+        'initialUsers',
         'initialRoles',
     ],
     data: function (){
         return {
-            user: {
-                role: {
-                    id: 0,
-                    role: null
-                },
-            },
+            users: {},
             roles: {},
             showSuccessMessage: false,
             successMessage: '',
@@ -52,9 +48,9 @@ export default {
         }
     },
     mounted() {
-        this.user = this.initialUser
+        this.users = this.initialUsers
         this.roles = this.initialRoles
-        // console.log(this.user.role.role)
+        console.log(this.initialUsers)
     },
     methods: {
         send () {

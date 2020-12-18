@@ -50,10 +50,10 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $role_id = $request->only('role');
-        $res = $request->except('role');
+        $res = $request->except('role','id_soc', 'soc_type');
         $res['role'] = $role_id['role']['id'];
         $user->update($res);
-
+        dd($user);
         return response()->json([
            'status' => 'success',
            'user' =>  User::query()->with('role')->where('id', $user['id'])->get()

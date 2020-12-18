@@ -1939,17 +1939,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserEditComponent",
-  props: ['initialUser', 'initialRoles'],
+  props: ['initialUsers', 'initialRoles'],
   data: function data() {
     return {
-      user: {
-        role: {
-          id: 0,
-          role: null
-        }
-      },
+      users: {},
       roles: {},
       showSuccessMessage: false,
       successMessage: '',
@@ -1958,8 +1954,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.user = this.initialUser;
-    this.roles = this.initialRoles; // console.log(this.user.role.role)
+    this.users = this.initialUsers;
+    this.roles = this.initialRoles;
+    console.log(this.initialUsers);
   },
   methods: {
     send: function send() {
@@ -37598,107 +37595,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-md-4 card m-2" }, [
-    _vm.showSuccessMessage
-      ? _c("div", { staticClass: "alert alert-success alert-block" }, [
-          _c(
-            "button",
-            {
-              staticClass: "close",
-              attrs: { type: "button", "data-dismiss": "alert" }
-            },
-            [_vm._v("×")]
-          ),
+  return _c(
+    "div",
+    { staticClass: "d-flex flex-wrap justify-content-start row" },
+    _vm._l(_vm.users, function(user) {
+      return _c("div", { staticClass: "col-md-4 card m-2" }, [
+        _vm.showSuccessMessage
+          ? _c("div", { staticClass: "alert alert-success alert-block" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "alert" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("strong", [_vm._v(_vm._s(_vm.successMessage))])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.showErrorMessage
+          ? _c("div", { staticClass: "alert alert-danger alert-block" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "alert" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("strong", [_vm._v(_vm._s(_vm.errorMessage))])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "height_250",
+          attrs: { src: "#", alt: "User image" }
+        }),
+        _vm._v(" "),
+        _c("h3", { staticClass: "card-header" }, [
+          _vm._v(" " + _vm._s(user.name))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v("Почта: " + _vm._s(user.email))
+          ]),
           _vm._v(" "),
-          _c("strong", [_vm._v(_vm._s(_vm.successMessage))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.showErrorMessage
-      ? _c("div", { staticClass: "alert alert-danger alert-block" }, [
-          _c(
-            "button",
-            {
-              staticClass: "close",
-              attrs: { type: "button", "data-dismiss": "alert" }
-            },
-            [_vm._v("×")]
-          ),
-          _vm._v(" "),
-          _c("strong", [_vm._v(_vm._s(_vm.errorMessage))])
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("img", {
-      staticClass: "height_250",
-      attrs: { src: "#", alt: "User image" }
-    }),
-    _vm._v(" "),
-    _c("h3", { staticClass: "card-header" }, [
-      _vm._v(" " + _vm._s(_vm.user.name))
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("p", { staticClass: "card-text" }, [
-        _vm._v("Почта: " + _vm._s(_vm.user.email))
-      ]),
-      _vm._v(" "),
-      _vm.user.role.role
-        ? _c("p", { staticClass: "card-text" }, [
-            _vm._v("Текущая роль: " + _vm._s(_vm.user.role.role))
-          ])
-        : _vm._e()
-    ]),
-    _vm._v(" "),
-    _c("label", { attrs: { for: "formSelectCategories" } }, [
-      _vm._v("Поменять роль:")
-    ]),
-    _vm._v(" "),
-    _c(
-      "select",
-      {
-        directives: [
+          user.role.role
+            ? _c("p", { staticClass: "card-text" }, [
+                _vm._v("Текущая роль: " + _vm._s(user.role.role))
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "formSelectCategories" } }, [
+          _vm._v("Поменять роль:")
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.user.role,
-            expression: "user.role"
-          }
-        ],
-        staticClass: "form-control m-1",
-        attrs: { id: "formSelectCategories", name: "category_id" },
-        on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.$set(
-              _vm.user,
-              "role",
-              $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-            )
-          }
-        }
-      },
-      _vm._l(_vm.roles, function(role) {
-        return _c("option", { domProps: { value: role } }, [
-          _vm._v(_vm._s(role.role))
-        ])
-      }),
-      0
-    ),
-    _vm._v(" "),
-    _c(
-      "button",
-      { staticClass: "btn-danger btn m-2", on: { click: _vm.send } },
-      [_vm._v("Внести изменения")]
-    )
-  ])
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: user.role,
+                expression: "user.role"
+              }
+            ],
+            staticClass: "form-control m-1",
+            attrs: { id: "formSelectCategories", name: "category_id" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  user,
+                  "role",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          _vm._l(_vm.roles, function(role) {
+            return _c("option", { domProps: { value: role } }, [
+              _vm._v(_vm._s(role.role))
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          { staticClass: "btn-danger btn m-2", on: { click: _vm.send } },
+          [_vm._v("Внести изменения")]
+        )
+      ])
+    }),
+    0
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
