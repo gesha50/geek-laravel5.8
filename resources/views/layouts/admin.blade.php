@@ -9,7 +9,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-<div id="app">
+<div>
     <div class="container-fluid jumbotron content">
         @include('inc.header')
         <div class="main">
@@ -32,6 +32,8 @@
     </div>
     @include('inc.footer')
 </div>
+
 <script src="{{ asset('js/app.js') }}"></script>
+@stack('js')
 </body>
 </html>

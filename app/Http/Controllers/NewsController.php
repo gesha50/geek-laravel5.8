@@ -11,7 +11,7 @@ class NewsController extends Controller
     //
     public function index () {
         return view('news',[
-            'news' => News::paginate(4),
+            'news' => News::where('is_private', 0)->paginate(4),
             'newsCategory' => CATEGORY::getCategory()
         ]);
     }

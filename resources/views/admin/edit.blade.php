@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-6 ">
+            <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                 <form method="POST" action="{{ route('admin.news.update', $news) }}" enctype="multipart/form-data">
@@ -60,9 +60,9 @@
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio"
-                               name="is_private" id="exampleRadios1" value="0"
+                               name="is_private" id="exampleRadios2" value="0"
                                @if(old('is_private', $news->is_private) == false) checked @endif>
-                        <label class="form-check-label" for="exampleRadios1">Публичная</label>
+                        <label class="form-check-label" for="exampleRadios2">Публичная</label>
                     </div>
 
                     <input type="file" class="form-control-file m-2"
@@ -80,3 +80,19 @@
     </div>
 
 @endsection
+
+@push('js')
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+        var spoiler = document.getElementById('formGroupExampleInput1')
+        CKEDITOR.replace(spoiler, options);
+        var description = document.getElementById('formGroupExampleInput2')
+        CKEDITOR.replace(description, options);
+    </script>
+@endpush

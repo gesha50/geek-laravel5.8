@@ -4,7 +4,9 @@
 namespace App\Library;
 
 
-class Calc
+use App\Library\Interfaces\CalcInterface;
+
+class Calc implements CalcInterface
 {
     protected $total;
 
@@ -17,12 +19,12 @@ class Calc
         return new self($total);
     }
 
-    public function add ($amount) {
+    public function add (int $amount) {
         $this->total += $amount;
         return $this;
     }
 
-    public function sub ($amount) {
+    public function sub (int $amount) {
         $this->total -= $amount;
         return $this;
     }

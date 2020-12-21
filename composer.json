@@ -15,7 +15,8 @@
         "laravel/tinker": "^1.0",
         "orchestra/parser": "^3.8",
         "socialiteproviders/facebook": "^1.0",
-        "socialiteproviders/vkontakte": "^4.0"
+        "socialiteproviders/vkontakte": "^4.0",
+        "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.4",

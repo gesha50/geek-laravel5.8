@@ -1940,6 +1940,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserEditComponent",
   props: ['initialUsers', 'initialRoles'],
@@ -1956,13 +1960,12 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.users = this.initialUsers;
     this.roles = this.initialRoles;
-    console.log(this.initialUsers);
   },
   methods: {
-    send: function send() {
+    send: function send(user) {
       var _this = this;
 
-      axios.post('/api/admin/user/edit/' + this.user.id, this.user).then(function (response) {
+      axios.post('/api/admin/user/edit/' + user.id, user).then(function (response) {
         _this.showSuccessMessage = true;
         _this.successMessage = 'Вы поменяли роль пользователя!';
       });
@@ -37688,7 +37691,9 @@ var render = function() {
           },
           _vm._l(_vm.roles, function(role) {
             return _c("option", { domProps: { value: role } }, [
-              _vm._v(_vm._s(role.role))
+              _vm._v(
+                "\n                " + _vm._s(role.role) + "\n            "
+              )
             ])
           }),
           0
@@ -37696,7 +37701,14 @@ var render = function() {
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn-danger btn m-2", on: { click: _vm.send } },
+          {
+            staticClass: "btn-danger btn m-2",
+            on: {
+              click: function($event) {
+                return _vm.send(user)
+              }
+            }
+          },
           [_vm._v("Внести изменения")]
         )
       ])
