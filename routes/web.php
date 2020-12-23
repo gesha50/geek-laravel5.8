@@ -16,7 +16,7 @@ Route::group(["prefix" => "news", "as" => "news"], function (){
 
 Route::group(["prefix" => "category", "as" => "category"], function (){
     Route::get('/', 'CategoryController@getCategory')->name('');
-    Route::get('/{id}', 'CategoryController@getOneCategory')->name('.id');
+    Route::get('/{category}', 'CategoryController@getOneCategory')->name('.id');
 });
 
 Route::group(["prefix" => "/admin",

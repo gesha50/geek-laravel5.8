@@ -9,9 +9,8 @@ class InfoController extends Controller
 {
     //
     public function index () {
-        $category = CATEGORY::getCategory();
         return view('info',[
-            'newsCategory' => $category
+            'newsCategory' => Category::all()
         ]);
     }
 }

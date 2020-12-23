@@ -17,7 +17,7 @@ class NewsController extends Controller
     }
 
     public function oneNews ($id) {
-        $oneNews = News::getNewsById($id);
+        $oneNews = News::where('id', $id)->first();
         if (empty($oneNews)) {
             abort(404);
         }

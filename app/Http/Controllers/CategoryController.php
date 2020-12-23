@@ -11,27 +11,21 @@ class CategoryController extends Controller
 {
 
     public function getCategory() {
-
-        //реализация калькулятора
-       // $res = $this->calc->add(5)->sub(1)->getResult();
-        ////////////////////////
-
-        $category = CATEGORY::getCategory();
         return view('category',[
-            'newsCategory' => $category
+            'newsCategory' => Category::all()
         ]);
     }
 
-    public function getOneCategory ($id) {
-        $category = CATEGORY::getCategory();
+    public function getOneCategory (Category $category) {
 
-        $news = News::query()->whereHas('category', function ($query) use ($id){
-            $query->where('category_id', $id);
-        })->get();
-
+//        $id = $category->id;
+//        $news = News::query()->whereHas('category', function ($query) use ($id){
+//            $query->where('category_id', $id);
+//        })->get();
         return view('newsOneCategory',[
-            'oneCategory' => $news,
-            'newsCategory' => $category
+            'oneCategory' => News::where('category_id', $category->id)->get(), //Эта простая строка заменяет 4 верхних строки!
+            'nameCategory' => $category->title,
+            'newsCategory' => Category::all(),
         ]);
     }
 }

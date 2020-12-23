@@ -19,7 +19,7 @@ class NewsController extends Controller
     {
         return view('admin.allNews', [
             'news' => News::orderByDesc('id')->paginate(4),
-            'newsCategory' => CATEGORY::getCategory(),
+            'newsCategory' => Category::all(),
             'isAdmin' => true
         ]);
     }
@@ -32,7 +32,7 @@ class NewsController extends Controller
     public function create()
     {
             return view('admin.add', [
-                'newsCategory' => CATEGORY::getCategory(),
+                'newsCategory' => Category::all(),
                 'isAdmin' => true
             ]);
 
@@ -66,7 +66,7 @@ class NewsController extends Controller
     {
         return view('admin.oneNews', [
             'oneNews' => $news,
-            'newsCategory' => CATEGORY::getCategory(),
+            'newsCategory' => Category::all(),
             'isAdmin' => true
         ]);
     }
@@ -80,7 +80,7 @@ class NewsController extends Controller
     public function edit(News $news)
     {
         return view('admin.edit', [
-                'newsCategory' => CATEGORY::getCategory(),
+                'newsCategory' => Category::all(),
                 'isAdmin' => true,
                 'news' => $news
             ]);

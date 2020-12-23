@@ -8,6 +8,11 @@ use App\Library\Interfaces\CalcInterface;
 
 class Calc implements CalcInterface
 {
+
+    //реализация калькулятора
+    // Calc::add(5)->sub(1)->getResult();
+    ////////////////////////
+
     protected $total;
 
     public function __construct($total = 0)

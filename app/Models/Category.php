@@ -9,9 +9,14 @@ class Category extends Model
 {
     protected $table = 'category';
 
-    public static function getCategory () {
-        return DB::select('SELECT * FROM category');
-    }
+    /**
+     * @var mixed
+     */
+    private $id;
+    /**
+     * @var mixed
+     */
+    private $title;
 
     public static function getOneCategory($id) {
         $news = DB::table('news')

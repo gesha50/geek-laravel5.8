@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         return view('admin.users.allUsers',[
             'users' => User::query()->with('role')->get(),
-            'newsCategory' => CATEGORY::getCategory(),
+            'newsCategory' => Category::all(),
             'roles' => Role::query()->select(['id', 'role'])->get()
         ]);
     }
