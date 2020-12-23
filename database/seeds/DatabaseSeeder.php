@@ -11,7 +11,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(NewsSeeder::class);
-        $this->call(CategoriesSeeder::class);
+        // если не видит сидр, то:  composer dump-autoload
+        $this->call([
+            NewsSeeder::class,
+            CategoriesSeeder::class,
+            RoleSeeder::class,
+            ResourcesSeeder::class
+        ]);
     }
 }

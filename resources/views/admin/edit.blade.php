@@ -15,37 +15,52 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Заголовок</label>
-                        <input name="title" type="text" dusk="title"
+                        <label for="formGroupTitle">Заголовок</label>
+                        <textarea name="title" type="text" dusk="title"
                                class="form-control @error('title') is-invalid @enderror"
-                               id="formGroupExampleInput"
-                               value="{{ old('title' , $news->title) }}">
+                               id="formGroupTitle"
+                               >{!! old('title', $news->title)  !!}</textarea>
                     </div>
                     @foreach($errors->get('title') as $error)
                         <div class="text-danger">{{ $error }}</div>
                     @endforeach
 
+
+
+
+
                     <div class="form-group">
-                        <label for="formGroupExampleInput1">Короткое описание</label>
-                        <input name="spoiler" type="text" dusk="spoiler"
+                        <label for="formGroupSpoiler">Короткое описание</label>
+                        <textarea name="spoiler" type="text" dusk="spoiler"
                                class="form-control spoiler_height @error('spoiler') is-invalid @enderror"
-                               id="formGroupExampleInput1"
-                               value="{{ old('spoiler' , $news->spoiler) }}">
+                               id="formGroupSpoiler"
+                        >{!! old('spoiler' , $news->spoiler) !!}</textarea>
                     </div>
                     @foreach($errors->get('spoiler') as $error)
                         <div class="text-danger">{{ $error }}</div>
                     @endforeach
 
+
+
+
+
+
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Текст Новости</label>
-                        <input name="description" type="text" dusk="description"
+                        <label for="formGroupDescription">Текст Новости</label>
+
+                        <textarea name="description" type="text" dusk="description"
                                class="form-control height @error('description') is-invalid @enderror"
-                               id="formGroupExampleInput2"
-                               value="{{ old('description' , $news->description) }}">
+                               id="formGroupDescription"
+                               >{!! old('description' , $news->description) !!}</textarea>
                     </div>
                     @foreach($errors->get('description') as $error)
                         <div class="text-danger">{{ $error }}</div>
                     @endforeach
+
+
+
+
+
                     <label for="formSelectCategories">Выберите категорию:</label>
                     <select id="formSelectCategories" name="category_id" class="form-control">
                         @foreach($newsCategory as $category)
@@ -65,9 +80,12 @@
                         <label class="form-check-label" for="exampleRadios2">Публичная</label>
                     </div>
 
+
+
+
                     <input type="file" class="form-control-file m-2"
                            id="exampleFormControlFile1" name="image"
-                           accept="image/*" value="/storage/4TQOnbJIAvokPHs63oA9LL0TKK4QKUJ2cc6Rq6Yu.jpeg}">
+                           accept="image/*" value="/storage/4TQOnbJIAvokPHs63oA9LL0TKK4QKUJ2cc6Rq6Yu.jpeg">
                     <img class="m-2" width="200px" src="{{old('image', $news->image) }}" alt="">
                     <button dusk="submit" type="submit" class="btn btn-success">Внести изменения</button>
                 </form>
@@ -81,6 +99,9 @@
 
 @endsection
 
+
+{{-- Дополнительные скрипты подключаем для редактирования --}}
+
 @push('js')
     <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     <script>
@@ -90,9 +111,9 @@
             filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
             filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
         };
-        var spoiler = document.getElementById('formGroupExampleInput1')
-        CKEDITOR.replace(spoiler, options);
-        var description = document.getElementById('formGroupExampleInput2')
-        CKEDITOR.replace(description, options);
+
+        CKEDITOR.replace('formGroupTitle', options);
+        CKEDITOR.replace('formGroupSpoiler', options);
+        CKEDITOR.replace('formGroupDescription', options);
     </script>
 @endpush

@@ -1,10 +1,12 @@
 <?php
 
+
 namespace App\Library\Facades;
 
-use App\Library\Interfaces\CalcInterface;
 
-class CalcFacade extends \Illuminate\Support\Facades\Facade
+use App\Library\Interfaces\NewsParserInterface;
+
+class NewsParserFacade  extends \Illuminate\Support\Facades\Facade
 {
     /**
      * Get the registered name of the component.
@@ -13,6 +15,6 @@ class CalcFacade extends \Illuminate\Support\Facades\Facade
      */
     protected static function getFacadeAccessor()
     {
-        return CalcInterface::class;
+        return NewsParserInterface::class;
     }
 }

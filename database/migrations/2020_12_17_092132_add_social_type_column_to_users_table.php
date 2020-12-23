@@ -14,8 +14,8 @@ class AddSocialTypeColumnToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('id_soc')->default(null);
-            $table->string('soc_type')->default(null);
+            $table->string('id_soc')->default(null)->nullable();
+            $table->string('soc_type')->default(null)->nullable();
         });
     }
 

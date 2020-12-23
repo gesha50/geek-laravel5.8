@@ -7,18 +7,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ route('home') }}">Главная</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.index') }}">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('info') }}">Информация</a>
+                    <a class="nav-link" href="{{ route('admin.news.index') }}">Новости</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('news') }}">Новости</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('category') }}">Категории</a>
-                </li>
+                @if(Auth::user()->hasRole('admin'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.news.create') }}">Добавить</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.parser.index') }}">Спарсить Новости</a>
+                    </li>
+                @endif
         </ul>
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
