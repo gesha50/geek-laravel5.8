@@ -6,9 +6,10 @@
     <h1>Новости</h1>
     <div class="d-flex flex-wrap justify-content-start">
         @foreach ($news as $item)
-        @include('news.cart')
+            @include('news.cart')
         @endforeach
     </div>
+    {{ $news->links() }}
 @endsection
 
 

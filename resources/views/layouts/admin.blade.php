@@ -9,22 +9,31 @@
     <title>@yield('title')</title>
 </head>
 <body>
-<div id="app">
+<div id="app" >
     <div class="container-fluid jumbotron content">
-        @include('inc.header')
+        @include('admin.inc.header')
         <div class="main">
             <div class="row">
                 <div class="col-md-2">
                     @include('inc.aside')
                 </div>
                 <div class="col-md-10 text-center">
+                    <div class="container">
+                        <div class="row justify-content-end">
+                            <div class="col-4">
+                                @include('admin._partials.flash-message')
+                            </div>
+                        </div>
+                    </div>
                     @yield('content')
                 </div>
             </div>
         </div>
     </div>
-    @include('inc.footer')
+    @include('admin.inc.footer')
 </div>
+
 <script src="{{ asset('js/app.js') }}"></script>
+@stack('js')
 </body>
 </html>

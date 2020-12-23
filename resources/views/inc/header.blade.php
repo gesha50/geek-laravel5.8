@@ -7,17 +7,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-            @if(isset($isAdmin))
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.index') }}">Главная</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news.allNews') }}">Новости</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.news.add') }}">Добавить</a>
-                </li>
-            @else
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ route('home') }}">Главная</a>
                 </li>
@@ -30,7 +19,37 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('category') }}">Категории</a>
                 </li>
-            @endif
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <!-- Authentication Links -->
+            @guest
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if (Route::has('register'))
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
+                @endif
+            @else
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    </div>
+                </li>
+            @endguest
         </ul>
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
